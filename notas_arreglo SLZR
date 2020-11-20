@@ -1,0 +1,42 @@
+program notas_arreglo;
+uses crt;
+var
+  nombres: array [1..10] of string;
+  notas: array [1..10,] of integer;
+  cedulas: array [1..10] of longint;
+  i, j, mayor, anterior: integer;
+  promedio: real;
+begin
+  promedio:=0;
+  for i:=1 to 10 do
+    begin
+      write('Ingresa el nombre del alumno: ');
+      readln(nombres[i]);
+      write('Ingresa la cedula del alumno: ');
+      readln(cedulas[i]);
+      write('Ingresa la nota del alumno: ');
+      readln(notas[i]);
+      promedio:=promedio+notas[i];          (* guardo la suma de las notas *)
+      clrscr;
+    end;
+
+  promedio:= promedio / 10;    (* saco el promedio *)
+  anterior:=100;               (* inicializo la variable en un numero grande *)
+  mayor:=0;                    (* la inicializo en un numero chiquito *)
+
+  for j:=1 to 10 do
+    begin
+      for i:=1 to 10 do        (* busco la mayor nota que sea menor al numero anterior *)
+        if (notas[i] > mayor) and (notas[j,2] < anterior) then
+          mayor:=notas[i];
+
+      for i:=1 to 10 do        (* escribire el nombre del alumno que tenga la misma nota que saque *)
+        if notas[i] = mayor then
+          writeln(nombres[i]);
+
+      anterior:=mayor;         (* actualizo la variable *)
+      mayor:=0;                (* inicializo en 0 *)
+    end;
+
+  readkey;
+end.
